@@ -11,6 +11,10 @@
     <div class="wind"></div>
     <div class="humidity"></div>
     <div class="temp"></div>
+
+    <!-- add an extra div for the bonus Fahrenheit temp -->
+    <div class="tempF"></div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
       // This is our API key. Add your own API key between the ""
@@ -25,6 +29,8 @@
       $.ajax({
         url: queryURL,
         method: "GET",
+
+        // we store all the retrieved data inside of an object called "response"
       }).then(function (response) {
         // Create CODE HERE to Log the queryURL
         console.log(queryURL);
@@ -39,24 +45,24 @@
         $(".wind").text("Wind Speed: " + response.wind.speed);
 
         $(".humidity").text("Humidity:" + response.main.humidity);
+
+        // Create CODE HERE to calculate the temperature (converted from Kelvin)
+
+        var tempF = (response.main.temp - 273.15) * 1.8 + 32;
+
+        // Hint: To convert from Kelvin to Fahrenheit: F = (K - 273.15) * 1.80 + 32
+
+        // Create CODE HERE to dump the temperature content into HTML
+
+        $(".temp").text("Tempataure: (K)  " + response.main.temp);
+
+        $(".tempF").text("Tempature: (F) " + tempF.toFixed(2));
+
+        //Log the data in the console
+        console.log("Wind Speed: " + response.wind.speed);
+        console.log("Humidity: " + response.main.humidity);
+        console.log("Temperature(K): " + tempF);
       });
-
-      // Create CODE HERE to calculate the temperature (converted from Kelvin)
-
-      // var tempF = (response.main.temp - 273.15) * 1.8 + 32;
-
-      // Hint: To convert from Kelvin to Fahrenheit: F = (K - 273.15) * 1.80 + 32
-
-      // Create CODE HERE to dump the temperature content into HTML
-
-      $(".temp").text("Tempataure  " + response.main.temp);
-
-      $("tempF").text("Tempature (F) " + tempF.toFixed(2));
-
-      //Log the data in the console
-      console.log("Wind Speed: " + response.wind.speed);
-      console.log("Humidity: " + response.main.humidity);
-      console.log("Temperature(F): " + tempF);
     </script>
   </body>
 </html>
